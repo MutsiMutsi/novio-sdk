@@ -1,6 +1,6 @@
 # Novio SDK
 Javascript implementation for novio website integration.
-This SDK allows for websites to request transactions to be signed from the novio wallet extension.l
+This SDK allows for websites to request transactions to be signed from the novio wallet extension.
 
 ## Usage
 ### Include
