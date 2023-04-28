@@ -13,7 +13,7 @@ This SDK allows for websites to request transactions to be signed from the novio
 ### Promises
 When you instantiate the novio-sdk no connection will be active with the client extension, this is for security reasons, the connection will only be established as soon as the user opens the extension on your page. Making any transaction requests before a wallet is connected will not yield any results. 
 
-Similarly when disconected promise is resolved no more transaction requests can be made, at this point a new novio instance should be instantiated and the user should be prompted once more to open their wallet.
+Similarly when the disconnected promise is resolved no more transaction requests can be made, at this point a new novio instance should be instantiated and the user should be prompted once more to open their wallet.
 
 	//Connected is a promise for when a novio wallet is successfully connected
 	novio.Connected.then(() => {}
