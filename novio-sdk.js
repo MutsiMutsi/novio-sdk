@@ -37,8 +37,11 @@ class Novio {
         return this.sendTransactionRequest('unsubscribe', [topic, identifier, attrs]);
     }
 
-    sendTransactionRequest(type, data) {
+    sign(message) {
+        return this.sendSignatureRequest(message);
+    }
 
+    sendTransactionRequest(type, data) {
         const txRequestEvent = new CustomEvent("onNovioTxRequest", {
             bubbles: true,
             cancelable: false,
@@ -51,6 +54,27 @@ class Novio {
 
         return new Promise((resolve, reject) => {
             window.addEventListener("onNovioTxResponse", (event) => {
+                if (event.detail.data.error) {
+                    reject(event.detail.data.error);
+                } else {
+                    resolve(event.detail);
+                }
+            }, false);
+        })
+    }
+
+    sendSignatureRequest(message) {
+        const signRequestEvent = new CustomEvent("onNovioSignRequest", {
+            bubbles: true,
+            cancelable: false,
+            detail: {
+                data: message
+            },
+        });
+        document.dispatchEvent(signRequestEvent);
+
+        return new Promise((resolve, reject) => {
+            window.addEventListener("onNovioSignResponse", (event) => {
                 if (event.detail.data.error) {
                     reject(event.detail.data.error);
                 } else {
