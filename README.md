@@ -1,3 +1,4 @@
+
 # Novio SDK
 Javascript implementation for novio website integration.
 This SDK allows for websites to request transactions to be signed from the novio wallet extension.
@@ -41,3 +42,19 @@ Each transaction request call returns a promise, this promise can yied both a su
 	}).catch((error) => {
 		alert(error);
 	})
+
+### Requesting a signature
+	novio.sign(message).then((result) => {
+		alert(result);
+	}).catch((error) => {
+		alert(error);
+	})
+	
+Result contains both the signature and the publickey of the signer.
+
+### Verifying a signature
+To verify the signature use the following encoding scheme:
+
+	 const encodedAndHashedTwice = sha256(sha256("NKN Signed Message:\n{message}"));
+	 sodium.crypto_sign_verify_detached(encodedAndHashedTwice, publicKey, signature);
+
